@@ -19,6 +19,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
+      backgroundColor: Colors.blue,
       body: Stack(
         children: [
           Positioned(
@@ -41,7 +42,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         borderRadius: BorderRadius.circular(50),
                       ),
                       child: const Icon(
-                        Icons.menu,
+                        Icons.list,
                         color: kWhite,
                         size: 30,
                       ),
