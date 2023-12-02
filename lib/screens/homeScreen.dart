@@ -1,73 +1,56 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:todo_state_management_with_flutter/components/TodoTile.dart';
+import 'package:todo_state_management_with_flutter/constants/colors.dart';
+import 'package:todo_state_management_with_flutter/constants/styles.dart';
 
-import '../constants/colors.dart';
-import '../constants/styles.dart';
-
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class TaskScreen extends StatefulWidget {
+  const TaskScreen({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<TaskScreen> createState() => _TaskScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
-    var width = MediaQuery.sizeOf(context).width;
     return Scaffold(
-      backgroundColor: Colors.blue,
-      body: Stack(
-        children: [
-          Positioned(
-            top: 0,
-            child: Container(
-              color: Colors.blue,
-              height: height * 0.5,
-              width: width,
-              child: Padding(
-                padding: const EdgeInsets.all(25.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(height: height * 0.08),
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: kWhite.withOpacity(0.5),
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      child: const Icon(
-                        Icons.list,
-                        color: kWhite,
-                        size: 30,
-                      ),
+      backgroundColor: Colors.lightBlueAccent,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.only(top: 50, left: 40, right: 40),
+              child: const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  CircleAvatar(
+                    radius: 30.0,
+                    backgroundColor: kWhite,
+                    child: Icon(
+                      Icons.list,
+                      size: 30.0,
+                      color: Colors.lightBlueAccent,
                     ),
-                    const Text('Daily Ones', style: kHeaderName),
-                    const Text('4 Tasks', style: kNormalStyle)
-                  ],
-                ),
+                  ),
+                  Text('Todoey', style: kHeaderName),
+                  Text('4 Tasks', style: kNormalStyle),
+                ],
               ),
             ),
-          ),
-          Positioned(
-            bottom: 0,
-            top: height * 0.35,
-            child: Container(
-              width: width,
+            const SizedBox(height: 20),
+            Expanded(
+                child: Container(
+              padding: const EdgeInsets.only(top: 20),
               decoration: const BoxDecoration(
-                color: Colors.white,
+                color: kWhite,
                 borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(15),
-                  topRight: Radius.circular(15),
+                  topLeft: Radius.circular(20),
+                  topRight: Radius.circular(20),
                 ),
               ),
-              child: const Column(
-                children: [
+              child: ListView(
+                children: const [
                   TodoTile(),
                   TodoTile(),
                   TodoTile(),
@@ -75,15 +58,36 @@ class _HomeScreenState extends State<HomeScreen> {
                   TodoTile(),
                 ],
               ),
-            ),
-          ),
-        ],
+            ))
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.lightBlueAccent,
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) {
+              return Container(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
+                child: Column(
+                  children: [
+                    const TextField(),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('Confirm'))
+                  ],
+                ),
+              );
+            },
+          );
+        },
+        child: const Icon(
+          Icons.add,
+          color: kWhite,
+        ),
       ),
     );
   }
 }
-
-// ListTile(
-//   leading:
-//   title:
-// )
