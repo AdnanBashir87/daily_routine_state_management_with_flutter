@@ -2,15 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:todo_state_management_with_flutter/components/TodoTile.dart';
 import 'package:todo_state_management_with_flutter/constants/colors.dart';
 import 'package:todo_state_management_with_flutter/constants/styles.dart';
+import 'package:todo_state_management_with_flutter/screens/addTaskScreen.dart';
 
-class TaskScreen extends StatefulWidget {
+class TaskScreen extends StatelessWidget {
   const TaskScreen({super.key});
 
-  @override
-  State<TaskScreen> createState() => _TaskScreenState();
-}
-
-class _TaskScreenState extends State<TaskScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,31 +30,32 @@ class _TaskScreenState extends State<TaskScreen> {
                     ),
                   ),
                   Text('Todoey', style: kHeaderName),
-                  Text('4 Tasks', style: kNormalStyle),
+                  Text('4 Tasks', style: kStyle18),
                 ],
               ),
             ),
             const SizedBox(height: 20),
             Expanded(
-                child: Container(
-              padding: const EdgeInsets.only(top: 20),
-              decoration: const BoxDecoration(
-                color: kWhite,
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(20),
-                  topRight: Radius.circular(20),
+              child: Container(
+                padding: const EdgeInsets.only(top: 20),
+                decoration: const BoxDecoration(
+                  color: kWhite,
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(20),
+                    topRight: Radius.circular(20),
+                  ),
+                ),
+                child: ListView(
+                  children: const [
+                    TodoTile(),
+                    TodoTile(),
+                    TodoTile(),
+                    TodoTile(),
+                    TodoTile(),
+                  ],
                 ),
               ),
-              child: ListView(
-                children: const [
-                  TodoTile(),
-                  TodoTile(),
-                  TodoTile(),
-                  TodoTile(),
-                  TodoTile(),
-                ],
-              ),
-            ))
+            )
           ],
         ),
       ),
@@ -66,22 +63,15 @@ class _TaskScreenState extends State<TaskScreen> {
         backgroundColor: Colors.lightBlueAccent,
         onPressed: () {
           showModalBottomSheet(
+            backgroundColor: const Color.fromARGB(255, 246, 244, 244),
             context: context,
-            builder: (context) {
-              return Container(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-                child: Column(
-                  children: [
-                    const TextField(),
-                    const SizedBox(height: 20),
-                    ElevatedButton(
-                        onPressed: () {}, child: const Text('Confirm'))
-                  ],
-                ),
-              );
-            },
-          );
+            builder: (context) => SingleChildScrollView(
+                child: Container(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).viewInsets.bottom),
+              child: const AddTaskScreen(),
+            )),
+           );
         },
         child: const Icon(
           Icons.add,

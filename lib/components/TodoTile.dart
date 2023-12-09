@@ -34,7 +34,7 @@ class _TodoTileState extends State<TodoTile> {
             ),
             Text(
               'Football',
-              style: kBlackStyle.copyWith(
+              style: kStyleB18.copyWith(
                 decoration: isDone == true
                     ? TextDecoration.lineThrough
                     : TextDecoration.none,
